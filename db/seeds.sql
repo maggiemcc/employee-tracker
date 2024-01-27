@@ -15,7 +15,7 @@ VALUES ("Head of Security", 20000, 2),
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
 VALUES ("Maggie", "McCausland", 4, NULL),
-        ("Aubrey", "Barnett", 3, 3),
-        ("Julie", "Porter", 2, 2),
-        ("Cierra", "Riggs", 1, 1);
+        ("Aubrey", "Barnett", 6, 3),
+        ("Julie", "Porter", 2, 5),
+        ("Cierra", "Riggs", 3, 1);
        
