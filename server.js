@@ -11,10 +11,10 @@ app.use(express.json());
 
 const db = mysql.createConnection(
   {
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "employeeTracker_db",
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "employeeTracker_db",
   },
   console.log(`Connected to the employeeTracker_db database.`)
 );
@@ -45,24 +45,66 @@ const begin = () => {
       },
     ])
     .then((data) => {
-        switch(data.option){
-            case "View All Departments": viewAllDepartments();
-            break;
-            case "Add Department": addDepartment();
-            break;
-            case "View All Roles": viewAllRoles();
-            break;
-            case "Add Role": addRole();
-            break;
-            case "View All Employees": viewAllEmployees();
-            break;
-            case "Add Employee": addEmployee();
-            break;
-            case "Update Employee Role": updateEmployeeRole();
-            break;
-            case "Exit": db.end();
-            console.log("Now Quitting");
-            break;
-        }
+      switch (data.option) {
+        case "View All Departments":
+          viewAllDepartments();
+          break;
+        case "Add Department":
+          addDepartment();
+          break;
+        case "View All Roles":
+          viewAllRoles();
+          break;
+        case "Add Role":
+          addRole();
+          break;
+        case "View All Employees":
+          viewAllEmployees();
+          break;
+        case "Add Employee":
+          addEmployee();
+          break;
+        case "Update Employee Role":
+          updateEmployeeRole();
+          break;
+        case "Exit":
+          db.end();
+          console.log("Now Quitting");
+          break;
+      }
     });
 };
+
+// VIEW ALL
+function viewAllDepartments() {
+  const allDepts = `SELECT * FROM departments`;
+  db.query(allDepts, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    begin();
+  });
+}
+
+function viewAllRoles() {
+  const allRoles = `SELECT roles.title, roles.id, departments.name, roles.salary from roles join departments on roles.department_id = departments.id`;
+  db.query(allRoles, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    begin();
+  });
+}
+
+function viewAllEmployees() {
+  const allEmployees = `
+    SELECT employees.id, employees.first_name, employees.last_name, roles.title, departments.name, roles.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager_name
+    FROM employees
+    LEFT JOIN roles ON employees.role_id = roles.id
+    LEFT JOIN departments ON roles.department_id = departments.id
+    LEFT JOIN employees manager ON employees.manager_id = manager.id;
+    `;
+  db.query(allEmployees, (err, res) => {
+    if (err) throw err;
+    console.table(res);
+    begin();
+  });
+}
