@@ -157,3 +157,72 @@ function addRole() {
             });
         });
 };
+
+
+function addEmployee() {
+    inquirer
+        .prompt([
+            {
+            type: "input",
+            name: "first_name",
+            message: "Enter employee's FIRST name:",
+        },
+        {
+            type: "input",
+            name: "last_name",
+            message: "Enter employee's LAST name:",
+        },
+        {
+            type: "input",
+            name: "role_id",
+            message: "The employee's position:",
+        },
+        {
+            type: "input",
+            name: "manager_id",
+            message: "Enter the employee's manager ID:",
+        },
+    ])
+        .then((data) => {
+            const newEmployee = `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
+            db.query(newEmployee, 
+                [data.first_name, data.last_name, data.role_id, data.manager_id], 
+                (err, res) => {
+                if (err) throw err;
+                console.log(`SUCCESS! Added employee ${data.first_name} ${data.last_name} to the database.`);
+                begin();
+            });
+        });
+};
+
+// function updateEmployeeRole(){
+//     inquirer
+//     .prompt([
+//       {
+//         type: 'input',
+//         name: 'employeeId',
+//         message: 'Enter the id of the employee you want to update:',
+//         validate: (input) => {
+//           return !isNaN(parseInt(input)) ? true : 'Please enter a valid number';
+//         },
+//       },
+//       {
+//         type: 'input',
+//         name: 'newRoleId',
+//         message: 'Enter the new role id for the employee:',
+//         validate: (input) => {
+//           return !isNaN(parseInt(input)) ? true : 'Please enter a valid number';
+//         },
+//       },
+//     ])
+//     .then((data) => {
+//       const employeeId = parseInt(data.employeeId);
+//       const newRoleId = parseInt(data.newRoleId);
+//       const sql = 'UPDATE employees SET role_id = ? WHERE id = ?';
+//       connection.query(sql, [newRoleId, employeeId], (err, result) => {
+//         if (err) throw err;
+//         console.log('Employee role updated successfully!');
+//         begin();
+//       });
+//     });
+// }

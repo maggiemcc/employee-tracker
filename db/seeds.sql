@@ -7,15 +7,15 @@ VALUES ("Sales"),
        ("HR");
 
 INSERT INTO roles (title, salary, department_id)
-VALUES ("Head of Security", 20000, 2),
-        ("CEO", 40000, 1),
+VALUES ("Head of Security", 20000, 1),
+        ("CEO", 40000, 2),
         ("Accountant", 35000, 3),
         ("IT Specialist", 35000, 4),
-        ("Intern", 15000, 1);
+        ("Intern", 15000, 5);
 
 INSERT INTO employees (first_name, last_name, role_id, manager_id)
-VALUES ("Maggie", "McCausland", 4, NULL),
-        ("Aubrey", "Barnett", 6, 3),
-        ("Julie", "Porter", 2, 5),
-        ("Cierra", "Riggs", 3, 1);
+VALUES ("Maggie", "McCausland", 1, 2),
+        ("Aubrey", "Barnett", 2, 2),
+        ("Julie", "Porter", 3, 2),
+        ("Cierra", "Riggs", 4, 2);
        
