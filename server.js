@@ -39,22 +39,30 @@ const begin = () => {
           "Add Role",
           "View All Employees",
           "Add Employee",
-          "Update An Employee Role",
+          "Update Employee Role",
           "Exit",
         ],
       },
     ])
     .then((data) => {
         switch(data.option){
-            
+            case "View All Departments": viewAllDepartments();
+            break;
+            case "Add Department": addDepartment();
+            break;
+            case "View All Roles": viewAllRoles();
+            break;
+            case "Add Role": addRole();
+            break;
+            case "View All Employees": viewAllEmployees();
+            break;
+            case "Add Employee": addEmployee();
+            break;
+            case "Update Employee Role": updateEmployeeRole();
+            break;
+            case "Exit": db.end();
+            console.log("Now Quitting");
+            break;
         }
     });
 };
-
-app.use((req, res) => {
-  res.status(404).end();
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
