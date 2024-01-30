@@ -16,13 +16,11 @@ so they can organize and plan their business.
 
 ## Installation
 
-List specific steps to help remove ambiguity and get people to use your project as quickly as possible. Let people know if it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually.  
- To install necessary dependencies, run the following command:
+To install necessary dependencies, run the following command:
 `npm install`
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. Use Insomnia or Postman to test route end points.  
 Create a .env file containing the following variables with your information:  
 ```
 DB_NAME='employeeTracker_db'
@@ -44,8 +42,7 @@ Click the image below to watch a walkthrough tutorial:
 
 ## Contributors
 
-Show your appreciation to those who have contributed to the project.  
- Also state if you are open to contributions and what your requirements are for accepting them. For people who want to make changes to your project, it's helpful to have some documentation on how to get started.
+Show your appreciation to those who have contributed to the project. Also state if you are open to contributions and what your requirements are for accepting them. For people who want to make changes to your project, it's helpful to have some documentation on how to get started.
 
 1. Fork the Project
 2. Create your Feature Branch: "git checkout - b feature / featureName"
