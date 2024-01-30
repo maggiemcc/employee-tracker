@@ -23,6 +23,13 @@ List specific steps to help remove ambiguity and get people to use your project 
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. Use Insomnia or Postman to test route end points.  
+Create a .env file containing the following variables with your information:  
+```
+DB_NAME='employeeTracker_db'
+DB_PASSWORD=''
+DB_USER=''
+PORT=''
+```
  To run the app, run the following commands:
 
 1. `mysql -u root` -or- `mysql -u root -p`
