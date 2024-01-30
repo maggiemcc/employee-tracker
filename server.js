@@ -1,9 +1,9 @@
 const express = require("express");
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
+require("dotenv").config();
 
-// const PORT = process.env.PORT || 1000;
-const PORT = 1000;
+const PORT = process.env.PORT || 1000;
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -12,9 +12,9 @@ app.use(express.json());
 const db = mysql.createConnection(
     {
         host: "localhost",
-        user: "root",
-        password: "",
-        database: "employeeTracker_db",
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME
     },
     console.log(`Connected to the employeeTracker_db database.`)
 );
@@ -22,9 +22,12 @@ const db = mysql.createConnection(
 db.connect((err) => {
     if (err) throw err;
     console.log("Connected to the database!");
+    console.log(`Server running on port ${PORT}`);
+
     begin();
 });
 
+// ASK DESIRED TASK
 const begin = () => {
     inquirer
         .prompt([
@@ -34,10 +37,10 @@ const begin = () => {
                 message: "What would you like to do?",
                 choices: [
                     "View All Departments",
-                    "Add Department",
                     "View All Roles",
-                    "Add Role",
                     "View All Employees",
+                    "Add Department",
+                    "Add Role",
                     "Add Employee",
                     "Update Employee Role",
                     "Exit",
@@ -227,6 +230,7 @@ function addEmployee() {
     });
 };
 
+// UPDATING
 function updateEmployeeRole() {
     const employees = `SELECT employees.id, employees.first_name, employees.last_name, roles.title FROM employees LEFT JOIN roles ON employees.role_id = roles.id`;
     const roles = `SELECT * FROM roles`;
@@ -253,11 +257,8 @@ function updateEmployeeRole() {
                     },
                 ])
                 .then((data) => {
-                    console.log("data:", data);
                     const findEmployee = listEmployees.find((employee)=> `${employee.first_name} ${employee.last_name}` === data.employeeName);
                     const findRole = listRoles.find((role)=> role.title === data.newRoleId);
-                    console.log("findMatch:", findEmployee)
-                    console.log("findMatch:", findRole)
 
                     const updateEmployee = 'UPDATE employees SET role_id = ? WHERE id = ?';
 
